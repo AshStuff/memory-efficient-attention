@@ -163,3 +163,13 @@ def efficient_dot_product_attention(query, key, value,
     _, res = scan(chunk_scanner, init=0, xs=None, length=math.ceil(num_q / query_chunk_size))
     rl = [res[i] for i in range(res.shape[0])]
     return torch.cat(rl, dim=-3)
+
+
+if __name__ == "__main__":
+    import torch 
+    q = torch.randn(1,128,8,16)
+    k = q.clone()
+    v = q.clone()
+
+    self_Attn = efficient_dot_product_attention(q,k,v)
+    print(self_Attn.shape)
