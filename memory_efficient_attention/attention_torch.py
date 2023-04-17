@@ -18,6 +18,7 @@ def _query_chunk_attention(query_idx, query, key, value,
 
     def summarize_chunk(key_idx, query, key, value, mask, bias):
         attn_weights = torch.einsum('...qhd,...khd->...qhk', query, key)
+        import pdb;pdb.set_trace()
         if bias_calc_fn is not None:
             bias = bias_calc_fn(query_idx, key_idx, bias, attn_weights, calc_fn_data)
         if bias is not None:
