@@ -136,6 +136,7 @@ def efficient_dot_product_attention(query, key, value,
         query_chunk = dynamic_slice(query, tuple([0] * (query.ndim - 3)) + (chunk_idx, 0, 0),
                                     tuple(query.shape[:-3]) + (min(query_chunk_size, num_q), num_heads, q_features))
 
+        import pdb;pdb.set_trace()
         if mask is None:
             mask_chunk = None
         elif mask.shape[-2] == 1:
@@ -167,9 +168,9 @@ def efficient_dot_product_attention(query, key, value,
 
 if __name__ == "__main__":
     import torch 
-    q = torch.randn(1,128,8,16)
+    q = torch.randn(1,1280,8,16)
     k = q.clone()
     v = q.clone()
-
-    self_Attn = efficient_dot_product_attention(q,k,v)
+    mask = torch.randn(1,1280) > 0.5
+    self_Attn = efficient_dot_product_attention(q,k,v, mask=mask)
     print(self_Attn.shape)
