@@ -1,6 +1,6 @@
 import torch
 from torch.utils.checkpoint import checkpoint
-from .utils import dynamic_slice, map_pt, scan
+from utils import dynamic_slice, map_pt, scan
 import math
 
 
