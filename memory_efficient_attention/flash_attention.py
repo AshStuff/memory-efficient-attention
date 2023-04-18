@@ -73,6 +73,6 @@ class FlashAttention(nn.Module):
 
 if __name__ == "__main__":
     import torch
-    arr = torch.randn(48, 6144, 3, 8, 16).cuda()
-    fa = FlashAttention().cuda()
+    arr = torch.randn(48, 6144, 3, 8, 16).half().cuda()
+    fa = FlashAttention().half().cuda()
     out = fa(arr)
