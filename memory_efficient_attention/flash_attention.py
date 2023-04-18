@@ -74,5 +74,6 @@ class FlashAttention(nn.Module):
 if __name__ == "__main__":
     import torch
     arr = torch.randn(48, 6144, 3, 8, 16).half().cuda()
+    mask = torch.randn(48,6144).half().cuda() > 0.5
     fa = FlashAttention().half().cuda()
-    out = fa(arr)
+    out = fa(arr, key_padding_mask=mask)
